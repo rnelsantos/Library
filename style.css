@@ -1,0 +1,113 @@
+/*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  * {
+    margin: 0;
+  }
+  body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+  }
+  input, button, textarea, select {
+    font: inherit;
+  }
+  p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+  }
+  #root, #__next {
+    isolation: isolate;
+  }
+
+  body {
+    background-color: var(--grey);
+    color: var(--black);
+    font-size: 18px;
+    font-weight: 500;
+    word-wrap: break-word;
+    /* footer support */
+    margin-bottom: 100px;
+  }
+
+
+/*HEADER*/
+
+.head-container{
+    font-style:oblique;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:1.5rem;
+    font-size: 20px;
+    box-shadow: 0 0.5rem 0.5rem #0c0c0c21, 6px 5px 12px rgba(184, 184, 184, 0.418);
+}
+
+
+
+/*UTIL*/
+
+button,
+input {
+  border: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+/*MAIN*/
+.main-container{
+    padding-left:2rem;
+    padding-right:2rem;
+    text-align: center;
+    padding: 1rem;
+}
+
+.books-grid{
+    border:2px solid red;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+}
+
+
+
+
+
+
+/* FOOTER */
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: var(--spacing-sm);
+  }
+  
+  .fa-github {
+    font-size: 24px;
+    color: var(--black);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .fa-github:hover {
+    transform: rotate(360deg) scale(1.2);
+  }
+  
+
+  
