@@ -1,4 +1,4 @@
-const myBooks = [];  // for book objects storage
+myBooks = [];  // for book objects storage
 
 
 
@@ -124,14 +124,14 @@ function addNewBook(){
 }
 
 //delete book function
-function deleteBook(){
+function deleteBook(e){
   const deleteButton = document.querySelector(".btn-del")
-  deleteButton.addEventListener('click', (e) => {
-    once: true
-    //e.preventDefault(); // spent hours (alternative put html form method dialog)
-    const title = e.target.parentNode.parentNode.firstChild.innerText
+    const title = e.target.parentNode.parentNode.firstChild.innerText;
     console.log(title);
-  })
+    const newBooks = myBooks.filter((item)=> {return item.title!=title});
+   myBooks = newBooks;
+   resetDisplayBooks();
+   myBooks.forEach(displayBook);
 }
 
 loadSampleBooks();
