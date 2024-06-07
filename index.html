@@ -21,12 +21,53 @@
         
     </header>
 
-    <main class="main-container"> 
+    <div class="wrapper">
+        <main class="main-container"> 
 
-        <button class="btn btn-add" id="addBookBtn">+ Add book</button>
-        <div class="books-grid"></div> 
+            <button class="btn btn-add" id="addBookBtn">+ Add book</button>
+            <div class="books-grid">
+                <!-- ------------------------------Sample HTML for Book Card--------------------
+                <div class="book-card"> 
+                    <p>TITLE</p>
+                    <p>AUTHOR</p>
+                    <p>PAGES</p>
+                    <div class="card-btns">
+                        <button class="btn btn-read" id="readBtn">Read</button>
+                        <button class="btn btn-del" id="delBtn">Delete</button>
+                    </div>
+                </div>
+                ---------------------->
+            </div>
 
-    </main>
+            <dialog>
+                <form class="addBook-form">
+                    <div>
+                    <label for="title">Title:</label><br>
+                    <input type="text" id="title" name="title" required  placeholder="ex: Harry Potter"><br>
+                    </div>
+                    <div>
+                    <label for="author">Author:</label><br>
+                    <input type="text" id="author" name="author" placeholder="ex: J.K. Rowling"><br>
+                    </div>
+                    <div>
+                    <label for="pages"># of Pages:</label><br>
+                    <input inputmode="numeric" type="number" id="pages" name="pages" placeholder="ex: 100">
+                    </div>
+
+                    <div class="form-btns">
+                    </div>
+                        <button class="btn btn-submit" id="submitBtn">Submit</button>
+                        <button class="btn btn-cancel" id="cancelBtn">Cancel</button>
+                    </div>
+                </form>
+                
+
+            </dialog>
+            
+        </main>
+    </div>
+
+
 
     <footer class="footer">
         <p>
