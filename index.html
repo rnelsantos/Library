@@ -39,8 +39,8 @@
                 ---------------------->
             </div>
 
-            <dialog>
-                <form class="addBook-form">
+            <dialog data-dialog>
+                <form class="addBook-form" id="addForm" method="dialog">
                     <div>
                     <label for="title">Title:</label><br>
                     <input type="text" id="title" name="title" required  placeholder="ex: Harry Potter"><br>
@@ -56,7 +56,7 @@
 
                     <div class="form-btns">
                     </div>
-                        <button class="btn btn-submit" id="submitBtn">Submit</button>
+                        <button class="btn btn-submit" id="submitBtn" >Submit</button>
                         <button class="btn btn-cancel" id="cancelBtn">Cancel</button>
                     </div>
                 </form>

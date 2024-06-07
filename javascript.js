@@ -36,6 +36,8 @@ const cardPages= document.createElement('p')
 const cardBtnDiv = document.createElement('div')
 const cardRead = document.createElement('button')
 const cardDelete = document.createElement('button')
+
+
 //append respective bookCard Childrens
 bookCard.appendChild(cardTitle);
 bookCard.appendChild(cardAuthor);
@@ -49,7 +51,9 @@ cardAuthor.innerText = key.author;
 cardPages.innerText = key.pages;
 cardRead.innerText = "Read";
 cardDelete.innerText = "Delete"
-
+//functions upon click
+cardRead.onclick =deleteBook
+cardDelete.onclick = deleteBook
 
 //add bookCard classlists
 bookCard.classList.add('book-card');
@@ -65,6 +69,13 @@ cardRead.setAttribute("id", "readBtn");
 booksGrid.appendChild(bookCard);
 }
 
+//Reset Book Display
+  function resetDisplayBooks(){
+  const booksGrid = document.querySelector(".books-grid");
+  while (booksGrid.firstChild) {
+  booksGrid.removeChild(booksGrid.firstChild);
+  }
+}
 
 // Close Modal When Clicked on Modal:Background / Cancel Button
 const cancelButton = document.querySelector("#cancelBtn")
@@ -80,7 +91,9 @@ dialog.addEventListener("click", e => {
     dialog.close()
   }
 })
-cancelButton.addEventListener('click', () => {
+
+cancelButton.addEventListener('click', (e) => {
+  e.preventDefault();
   dialog.close();
 })
 
@@ -90,27 +103,48 @@ const addButton = document.querySelector("#addBookBtn")
   dialog.showModal();
   })
 
-//add Book to myBooks Array  
+//add Book to myBooks Array  upon submit
 const submitButton = document.querySelector("#submitBtn")
 submitButton.addEventListener('click', () => {
-     newTitle = document.querySelector("#title").value;
-     newAuthor = document.querySelector("#author").value;
-     newPages = document.querySelector("#pages").value;
-  
-    addBookTomyBooks(newTitle,newAuthor,newPages,false);
-    addBookTomyBooks("7 habits","james clear","123",false);
-    myBooks.forEach(displayBook);
-    
+  //e.preventDefault(); // spent hours (alternative put html form method dialog)
+  addNewBook();  
+  dialog.close();
 })
+//add book function
+function addNewBook(){
+  newTitle = document.querySelector("#title").value;
+  newAuthor = document.querySelector("#author").value;
+  newPages = document.querySelector("#pages").value;
+ addBookTomyBooks(newTitle,newAuthor,newPages,false);
+ resetDisplayBooks();
+ myBooks.forEach(displayBook);
+  //resetFrom
+  var form = document.querySelector("form");
+  form.reset();
+}
 
-
-
-
-
-
+//delete book function
+function deleteBook(){
+  const deleteButton = document.querySelector(".btn-del")
+  deleteButton.addEventListener('click', (e) => {
+    once: true
+    //e.preventDefault(); // spent hours (alternative put html form method dialog)
+    const title = e.target.parentNode.parentNode.firstChild.innerText
+    console.log(title);
+  })
+}
 
 loadSampleBooks();
-
 myBooks.forEach(displayBook);
+
+
+
+
+
+
+
+
+//loadSampleBooks();
+//myBooks.forEach(displayBook);
 console.log(myBooks);
 
