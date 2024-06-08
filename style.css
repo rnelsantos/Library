@@ -171,6 +171,14 @@ dialog{
   border-radius: 0.5rem;
 }
 
+.done{
+  color:rgb(1, 48, 1);
+  background-color: rgba(90, 143, 10, 0.863);
+}
+.btn-read{
+  width:5em;
+}
+
 
 
 

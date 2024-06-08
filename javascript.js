@@ -49,10 +49,11 @@ cardBtnDiv.appendChild(cardDelete);
 cardTitle.innerText = key.title;
 cardAuthor.innerText = key.author;
 cardPages.innerText = key.pages;
-cardRead.innerText = "Read";
+if(key.read===true){state="Done✔️"; cardRead.classList.add('done');}else{state="Ongoing"; cardRead.classList.remove('done');};
+cardRead.innerText = state;
 cardDelete.innerText = "Delete"
 //functions upon click
-cardRead.onclick =deleteBook
+cardRead.onclick =toggleRead
 cardDelete.onclick = deleteBook
 
 //add bookCard classlists
@@ -119,22 +120,31 @@ function addNewBook(){
  resetDisplayBooks();
  myBooks.forEach(displayBook);
   //resetFrom
-  var form = document.querySelector("form");
-  form.reset();
+  var form = document.querySelector("form").reset();
 }
 
 //delete book function
 function deleteBook(e){
   const deleteButton = document.querySelector(".btn-del")
-    const title = e.target.parentNode.parentNode.firstChild.innerText;
-    console.log(title);
-    const newBooks = myBooks.filter((item)=> {return item.title!=title});
-   myBooks = newBooks;
-   resetDisplayBooks();
-   myBooks.forEach(displayBook);
+  const title = e.target.parentNode.parentNode.firstChild.innerText;
+  myBooks= myBooks.filter((item)=> {return item.title!=title});
+  resetDisplayBooks(); myBooks.forEach(displayBook); 
 }
 
-loadSampleBooks();
+//toggle read/unread book function
+function toggleRead(e){
+  const readButton = document.querySelector(".btn-read")
+  const title = e.target.parentNode.parentNode.firstChild.innerText;
+  myBooks.forEach((book) => {if(book.title===title){book.read = !book.read}})
+  console.log(title);
+
+  resetDisplayBooks();
+  myBooks.forEach(displayBook);
+}
+
+
+
+loadSampleBooks(); // for debugging
 myBooks.forEach(displayBook);
 
 
