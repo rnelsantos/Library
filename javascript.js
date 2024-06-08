@@ -1,5 +1,19 @@
-myBooks = [];  // for book objects storage
+restoreLocal()
 
+
+function saveLocal() {
+  localStorage.setItem('library', JSON.stringify(myBooks))
+}
+
+function restoreLocal() {
+  const books = JSON.parse(localStorage.getItem('library'))
+  if (books) {
+    //myBooks = books.map((book) => JSONToBook(book))
+    myBooks = books;
+  } else {
+    myBooks = [];
+  }
+}
 
 
 //Declared functions----
@@ -15,6 +29,7 @@ function addBookTomyBooks(title,author,pages,read) {
   // do add books to library 
   const addBook = new Book(title,author,pages,read);
   myBooks.push(addBook);
+  saveLocal();
 }
 
 //pre-load sample books
@@ -47,6 +62,7 @@ function displayNone(){
 }
 
 function displayBook(key, value){
+  saveLocal();
   //Display myBook stored items
   const booksGrid = document.querySelector(".books-grid");
   //Create bookCard Elements
@@ -90,12 +106,14 @@ function displayBook(key, value){
   //Add to existing Html DOM
   booksGrid.appendChild(bookCard);
 
-  //remove noDisplay Text
+  //remove addBooks to start Text 
   const noDisplay = document.querySelector(".noDisContainer");
+  if(noDisplay){
   while (noDisplay.firstChild) {
     noDisplay.removeChild(noDisplay.firstChild);
-  }
+  }}
 }
+
 
 //Reset Book Display
   function resetDisplayBooks(){
@@ -157,7 +175,7 @@ function deleteBook(e){
   const deleteButton = document.querySelector(".btn-del")
   const title = e.target.parentNode.parentNode.firstChild.innerText;
   myBooks= myBooks.filter((item)=> {return item.title!=title});
-  resetDisplayBooks(); myBooks.forEach(displayBook);   
+  resetDisplayBooks(); myBooks.forEach(displayBook);saveLocal();   
 }
 
 //toggle read/unread book function
