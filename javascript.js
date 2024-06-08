@@ -19,78 +19,105 @@ function addBookTomyBooks(title,author,pages,read) {
 
 //pre-load sample books
 function loadSampleBooks() {
+resetDisplayBooks()
 addBookTomyBooks("moby dick","stan lee","123",true);
 addBookTomyBooks("atomic habits","james clear","123",false);
 addBookTomyBooks("3 little pigs","beo wolf","435",false);
+myBooks.forEach(displayBook);
 }
 
 
+function displayNone(){
+  resetDisplayBooks()
+  const main = document.querySelector(".main-container");
+  const sampleButton = document.createElement('button');
+  const NoDisplayText = document.createElement('h2')
+  const noDisplayContainer = document.createElement('div')
+    noDisplayContainer.classList.add('noDisContainer');
+    main.appendChild(noDisplayContainer);
+    // start text display
+    NoDisplayText.innerText = "Press +Add Books to start"
+    NoDisplayText.classList.add('noBooks');
+    noDisplayContainer.appendChild(NoDisplayText);
+    //Sample button
+    sampleButton.innerText = "Load Sample Books"
+    sampleButton.classList.add('btn-sample');
+    noDisplayContainer.appendChild(sampleButton);
+    sampleButton.onclick = loadSampleBooks
+}
+
 function displayBook(key, value){
-//Display myBook stored items
-const booksGrid = document.querySelector(".books-grid");
-//Create bookCard Elements
-const bookCard = document.createElement('div')
-const cardTitle = document.createElement('p')
-const cardAuthor= document.createElement('p')
-const cardPages= document.createElement('p')
-const cardBtnDiv = document.createElement('div')
-const cardRead = document.createElement('button')
-const cardDelete = document.createElement('button')
+  //Display myBook stored items
+  const booksGrid = document.querySelector(".books-grid");
+  //Create bookCard Elements
+  const bookCard = document.createElement('div')
+  const cardTitle = document.createElement('p')
+  const cardAuthor= document.createElement('p')
+  const cardPages= document.createElement('p')
+  const cardBtnDiv = document.createElement('div')
+  const cardRead = document.createElement('button')
+  const cardDelete = document.createElement('button')
 
 
-//append respective bookCard Childrens
-bookCard.appendChild(cardTitle);
-bookCard.appendChild(cardAuthor);
-bookCard.appendChild(cardPages);
-bookCard.appendChild(cardBtnDiv);
-cardBtnDiv.appendChild(cardRead);
-cardBtnDiv.appendChild(cardDelete);
-//input myBook info txt
-cardTitle.innerText = key.title;
-cardAuthor.innerText = key.author;
-cardPages.innerText = key.pages;
-if(key.read===true){state="Done✔️"; cardRead.classList.add('done');}else{state="Ongoing"; cardRead.classList.remove('done');};
-cardRead.innerText = state;
-cardDelete.innerText = "Delete"
-//functions upon click
-cardRead.onclick =toggleRead
-cardDelete.onclick = deleteBook
+  //append respective bookCard Childrens
+  bookCard.appendChild(cardTitle);
+  bookCard.appendChild(cardAuthor);
+  bookCard.appendChild(cardPages);
+  bookCard.appendChild(cardBtnDiv);
+  cardBtnDiv.appendChild(cardRead);
+  cardBtnDiv.appendChild(cardDelete);
+  //input myBook info txt
+  cardTitle.innerText = key.title;
+  cardAuthor.innerText = key.author;
+  cardPages.innerText = key.pages;
+  if(key.read===true){state="Done✔️"; cardRead.classList.add('done');}else{state="Ongoing"; cardRead.classList.remove('done');};
+  cardRead.innerText = state;
+  cardDelete.innerText = "Delete"
+  //functions upon click
+  cardRead.onclick =toggleRead
+  cardDelete.onclick = deleteBook
 
-//add bookCard classlists
-bookCard.classList.add('book-card');
-cardBtnDiv.classList.add('card-btns');
-cardRead.classList.add('btn');
-cardDelete.classList.add('btn');
-cardRead.classList.add('btn-read');
-cardDelete.classList.add('btn-del');
-cardDelete.setAttribute("id", "delBtn");
-cardRead.setAttribute("id", "readBtn");
+  //add bookCard classlists
+  bookCard.classList.add('book-card');
+  cardBtnDiv.classList.add('card-btns');
+  cardRead.classList.add('btn');
+  cardDelete.classList.add('btn');
+  cardRead.classList.add('btn-read');
+  cardDelete.classList.add('btn-del');
+  cardDelete.setAttribute("id", "delBtn");
+  cardRead.setAttribute("id", "readBtn");
 
-//Add to existing Html DOM
-booksGrid.appendChild(bookCard);
+  //Add to existing Html DOM
+  booksGrid.appendChild(bookCard);
+
+  //remove noDisplay Text
+  const noDisplay = document.querySelector(".noDisContainer");
+  while (noDisplay.firstChild) {
+    noDisplay.removeChild(noDisplay.firstChild);
+  }
 }
 
 //Reset Book Display
   function resetDisplayBooks(){
-  const booksGrid = document.querySelector(".books-grid");
-  while (booksGrid.firstChild) {
-  booksGrid.removeChild(booksGrid.firstChild);
-  }
+    const booksGrid = document.querySelector(".books-grid");
+    while (booksGrid.firstChild) {
+    booksGrid.removeChild(booksGrid.firstChild);
+    }
 }
 
 // Close Modal When Clicked on Modal:Background / Cancel Button
 const cancelButton = document.querySelector("#cancelBtn")
-const dialog = document.querySelector("dialog")
-dialog.addEventListener("click", e => {
-  const dialogDimensions = dialog.getBoundingClientRect()
-  if (
-    e.clientX < dialogDimensions.left ||
-    e.clientX > dialogDimensions.right ||
-    e.clientY < dialogDimensions.top ||
-    e.clientY > dialogDimensions.bottom
-  ) {
-    dialog.close()
-  }
+  const dialog = document.querySelector("dialog")
+  dialog.addEventListener("click", e => {
+    const dialogDimensions = dialog.getBoundingClientRect()
+    if (
+      e.clientX < dialogDimensions.left ||
+      e.clientX > dialogDimensions.right ||
+      e.clientY < dialogDimensions.top ||
+      e.clientY > dialogDimensions.bottom
+    ) {
+      dialog.close()
+    }
 })
 
 cancelButton.addEventListener('click', (e) => {
@@ -103,6 +130,8 @@ const addButton = document.querySelector("#addBookBtn")
   addButton.addEventListener('click', () => {
   dialog.showModal();
   })
+
+
 
 //add Book to myBooks Array  upon submit
 const submitButton = document.querySelector("#submitBtn")
@@ -128,7 +157,7 @@ function deleteBook(e){
   const deleteButton = document.querySelector(".btn-del")
   const title = e.target.parentNode.parentNode.firstChild.innerText;
   myBooks= myBooks.filter((item)=> {return item.title!=title});
-  resetDisplayBooks(); myBooks.forEach(displayBook); 
+  resetDisplayBooks(); myBooks.forEach(displayBook);   
 }
 
 //toggle read/unread book function
@@ -144,8 +173,10 @@ function toggleRead(e){
 
 
 
-loadSampleBooks(); // for debugging
-myBooks.forEach(displayBook);
+
+if (myBooks.length === 0) {displayNone()} // display if no books
+//loadSampleBooks(); // for debugging
+myBooks.forEach(displayBook); // display if there's stored
 
 
 

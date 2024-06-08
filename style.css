@@ -72,6 +72,10 @@
   grid-column: 1 / 4;
 }
 
+.noDisplay{
+  display: none;
+}
+
 
 
 /*HEADER*/
@@ -119,6 +123,15 @@ form > *{
   font-family: 'Courier New', Courier, monospace;
   font-size: 24px;
  
+}
+
+
+.btn-sample{
+  color: rgb(117, 117, 117);
+  font-size: 15px;
+  font-weight: 400;
+  border: solid 2px rgb(194, 176, 176);
+  background-color:   var(--grey);
 }
 
 
@@ -171,7 +184,7 @@ dialog{
   border-radius: 0.5rem;
 }
 
-.done{
+.done{//for togfle buttons
   color:rgb(1, 48, 1);
   background-color: rgba(90, 143, 10, 0.863);
 }
@@ -179,6 +192,12 @@ dialog{
   width:5em;
 }
 
+
+.noBooks{
+
+  color: gray;
+  text-align: center;
+}
 
 
 
