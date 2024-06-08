@@ -194,11 +194,21 @@ dialog{
 
 
 .noBooks{
-
   color: gray;
   text-align: center;
 }
 
+#titleText{
+  font-size: 1.2em;
+  font-weight: 900;
+  font-family:  monospace;
+  overflow: hidden;
+}
+
+.book-card{
+  font-family:  arial;
+  overflow: hidden;
+}
 
 
 

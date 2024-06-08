@@ -102,6 +102,7 @@ function displayBook(key, value){
   cardDelete.classList.add('btn-del');
   cardDelete.setAttribute("id", "delBtn");
   cardRead.setAttribute("id", "readBtn");
+  cardTitle.setAttribute("id", "titleText");
 
   //Add to existing Html DOM
   booksGrid.appendChild(bookCard);
