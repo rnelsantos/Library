@@ -83,7 +83,7 @@ function displayBook(key, value){
   cardBtnDiv.appendChild(cardRead);
   cardBtnDiv.appendChild(cardDelete);
   //input myBook info txt
-  cardTitle.innerText = "Title:"+" "+" "+ key.title;
+  cardTitle.innerText = key.title;
   cardAuthor.innerText ="Author:"+" "+" "+ key.author;
   cardPages.innerText ="no. of Pages:"+" "+" "+ key.pages;
   if(key.read===true){state="Done✔️"; cardRead.classList.add('done');}else{state="Ongoing"; cardRead.classList.remove('done');};
