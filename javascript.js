@@ -1,10 +1,9 @@
 restoreLocal()
 
-
+//Local Storage 
 function saveLocal() {
   localStorage.setItem('library', JSON.stringify(myBooks))
 }
-
 function restoreLocal() {
   const books = JSON.parse(localStorage.getItem('library'))
   if (books) {
@@ -16,7 +15,7 @@ function restoreLocal() {
 }
 
 
-//Declared functions----
+
 function Book(title,author,pages,read) {
   // the constructor...
   this.title = title;
@@ -107,7 +106,7 @@ function displayBook(key, value){
   //Add to existing Html DOM
   booksGrid.appendChild(bookCard);
 
-  //remove addBooks to start Text 
+  //remove emptyBooks note Text 
   const noDisplay = document.querySelector(".noDisContainer");
   if(noDisplay){
   while (noDisplay.firstChild) {
@@ -116,7 +115,7 @@ function displayBook(key, value){
 }
 
 
-//Reset Book Display
+//Clear existing Book Display
   function resetDisplayBooks(){
     const booksGrid = document.querySelector(".books-grid");
     while (booksGrid.firstChild) {
@@ -138,10 +137,9 @@ const cancelButton = document.querySelector("#cancelBtn")
       dialog.close()
     }
 })
-
-cancelButton.addEventListener('click', (e) => {
-  e.preventDefault();
-  dialog.close();
+  cancelButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    dialog.close();
 })
 
 //Open Add Form on Modal 
@@ -151,24 +149,22 @@ const addButton = document.querySelector("#addBookBtn")
   })
 
 
-
 //add Book to myBooks Array  upon submit
 const submitButton = document.querySelector("#submitBtn")
 submitButton.addEventListener('click', () => {
-  //e.preventDefault(); // spent hours (alternative put html form method dialog)
+  //e.preventDefault(); // spent an hour (alternative put html form method dialog)
   addNewBook();  
   dialog.close();
 })
+
 //add book function
 function addNewBook(){
   newTitle = document.querySelector("#title").value;
   newAuthor = document.querySelector("#author").value;
   newPages = document.querySelector("#pages").value;
- addBookTomyBooks(newTitle,newAuthor,newPages,false);
- resetDisplayBooks();
- myBooks.forEach(displayBook);
-  //resetFrom
-  var form = document.querySelector("form").reset();
+  addBookTomyBooks(newTitle,newAuthor,newPages,false);
+  refreshBookDisplay();
+  document.querySelector("form").reset();
 }
 
 //delete book function
@@ -176,7 +172,7 @@ function deleteBook(e){
   const deleteButton = document.querySelector(".btn-del")
   const title = e.target.parentNode.parentNode.firstChild.innerText;
   myBooks= myBooks.filter((item)=> {return item.title!=title});
-  resetDisplayBooks(); myBooks.forEach(displayBook);saveLocal();   
+  refreshBookDisplay(); 
 }
 
 //toggle read/unread book function
@@ -184,27 +180,22 @@ function toggleRead(e){
   const readButton = document.querySelector(".btn-read")
   const title = e.target.parentNode.parentNode.firstChild.innerText;
   myBooks.forEach((book) => {if(book.title===title){book.read = !book.read}})
-  console.log(title);
-
-  resetDisplayBooks();
-  myBooks.forEach(displayBook);
+  refreshBookDisplay()
 }
 
+//Refresh Grid Display
+function refreshBookDisplay(){
+  resetDisplayBooks();
+  myBooks.forEach(displayBook);
+  saveLocal();   
+}
+
+if (myBooks.length === 0) {displayNone()} // display note if grid empty
 
 
 
-if (myBooks.length === 0) {displayNone()} // display if no books
 //loadSampleBooks(); // for debugging
 myBooks.forEach(displayBook); // display if there's stored
-
-
-
-
-
-
-
-
-//loadSampleBooks();
-//myBooks.forEach(displayBook);
-console.log(myBooks);
+//loadSampleBooks(); // for debugging
+//console.log(myBooks);
 
